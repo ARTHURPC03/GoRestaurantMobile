@@ -1,12 +1,12 @@
-import React from 'react';
+import React from 'react'
 
-import { render, wait } from '@testing-library/react-native';
-import AxiosMock from 'axios-mock-adapter';
-import api from '../../services/api';
+import { render, wait } from '@testing-library/react-native'
+import AxiosMock from 'axios-mock-adapter'
+import api from '../../services/api'
 
-import Orders from '../../pages/Orders';
+import Orders from '../../pages/Orders'
 
-const mockedNavigate = jest.fn();
+const mockedNavigate = jest.fn()
 
 jest.mock('@react-navigation/native', () => {
   return {
@@ -14,10 +14,10 @@ jest.mock('@react-navigation/native', () => {
     useNavigation: () => ({
       navigate: mockedNavigate,
     }),
-  };
-});
+  }
+})
 
-const apiMock = new AxiosMock(api);
+const apiMock = new AxiosMock(api)
 
 describe('Orders', () => {
   it('should be able to list the orders', async () => {
@@ -65,27 +65,27 @@ describe('Orders', () => {
           },
         ],
       },
-    ];
+    ]
 
-    apiMock.onGet('/orders').reply(200, items);
+    apiMock.onGet('/orders').reply(200, items)
 
-    const { getByText } = render(<Orders />);
+    const { getByText } = render(<Orders />)
 
     await wait(() => expect(getByText('Ao molho')).toBeTruthy(), {
       timeout: 200,
-    });
+    })
 
-    expect(getByText('Ao molho')).toBeTruthy();
+    expect(getByText('Ao molho')).toBeTruthy()
     expect(
       getByText(
         'Macarrão ao molho branco, fughi e cheiro verde das montanhas.',
       ),
-    ).toBeTruthy();
-    expect(getByText('Veggie')).toBeTruthy();
+    ).toBeTruthy()
+    expect(getByText('Veggie')).toBeTruthy()
     expect(
       getByText(
         'Macarrão com pimentão, ervilha e ervas finas colhidas no himalaia.',
       ),
-    ).toBeTruthy();
-  });
-});
+    ).toBeTruthy()
+  })
+})

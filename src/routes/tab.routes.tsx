@@ -1,13 +1,13 @@
-import React from 'react';
+import React from 'react'
 
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
-import Icon from 'react-native-vector-icons/Feather';
-import Dashboard from '../pages/Dashboard';
-import Favorites from '../pages/Favorites';
-import Orders from '../pages/Orders';
+import Icon from 'react-native-vector-icons/Feather'
+import Dashboard from '../pages/Dashboard'
+import Favorites from '../pages/Favorites'
+import Orders from '../pages/Orders'
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator()
 
 const TabRoutes: React.FC = () => (
   <Tab.Navigator
@@ -52,6 +52,6 @@ const TabRoutes: React.FC = () => (
       component={Favorites}
     />
   </Tab.Navigator>
-);
+)
 
-export default TabRoutes;
+export default TabRoutes

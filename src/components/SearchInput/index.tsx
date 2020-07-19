@@ -1,26 +1,26 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback } from 'react'
 
-import { TextInputProps } from 'react-native';
+import { TextInputProps } from 'react-native'
 
-import { Container, TextInput, Icon } from './styles';
+import { Container, TextInput, Icon } from './styles'
 
 interface InputProps extends TextInputProps {
-  name?: string;
+  name?: string
 }
 
 const SearchInput: React.FC<InputProps> = ({ value = '', ...rest }) => {
-  const [isFocused, setIsFocused] = useState(false);
-  const [isFilled, setIsFilled] = useState(false);
+  const [isFocused, setIsFocused] = useState(false)
+  const [isFilled, setIsFilled] = useState(false)
 
   const handleInputFocus = useCallback(() => {
-    setIsFocused(true);
-  }, []);
+    setIsFocused(true)
+  }, [])
 
   const handleInputBlur = useCallback(() => {
-    setIsFocused(false);
+    setIsFocused(false)
 
-    setIsFilled(!!value);
-  }, [value]);
+    setIsFilled(!!value)
+  }, [value])
 
   return (
     <Container isFocused={isFocused}>
@@ -39,7 +39,7 @@ const SearchInput: React.FC<InputProps> = ({ value = '', ...rest }) => {
         {...rest}
       />
     </Container>
-  );
-};
+  )
+}
 
-export default SearchInput;
+export default SearchInput

@@ -1,12 +1,12 @@
-import React from 'react';
+import React from 'react'
 
-import { render, fireEvent, act, wait } from '@testing-library/react-native';
-import AxiosMock from 'axios-mock-adapter';
-import api from '../../services/api';
+import { render, fireEvent, act, wait } from '@testing-library/react-native'
+import AxiosMock from 'axios-mock-adapter'
+import api from '../../services/api'
 
-import Dashboard from '../../pages/Dashboard';
+import Dashboard from '../../pages/Dashboard'
 
-const mockedNavigate = jest.fn();
+const mockedNavigate = jest.fn()
 
 jest.mock('@react-navigation/native', () => {
   return {
@@ -14,10 +14,10 @@ jest.mock('@react-navigation/native', () => {
     useNavigation: () => ({
       navigate: mockedNavigate,
     }),
-  };
-});
+  }
+})
 
-const apiMock = new AxiosMock(api);
+const apiMock = new AxiosMock(api)
 
 describe('Dashboard', () => {
   it('should be able to list the food plates', async () => {
@@ -65,7 +65,7 @@ describe('Dashboard', () => {
           },
         ],
       },
-    ];
+    ]
 
     apiMock.onGet('/categories').reply(200, [
       {
@@ -74,37 +74,37 @@ describe('Dashboard', () => {
         image_url:
           'https://storage.googleapis.com/golden-wind/bootcamp-gostack/desafio-gorestaurant-mobile/massas.png',
       },
-    ]);
+    ])
 
     apiMock.onGet('/foods').reply(config => {
       if (config.params.name_like === '') {
-        return [200, items];
+        return [200, items]
       }
 
-      return [200, items];
-    });
+      return [200, items]
+    })
 
-    apiMock.onGet('/foods?name_like=').reply(200, items);
+    apiMock.onGet('/foods?name_like=').reply(200, items)
 
-    const { getByText } = render(<Dashboard />);
+    const { getByText } = render(<Dashboard />)
 
     await wait(() => expect(getByText('Ao molho')).toBeTruthy(), {
       timeout: 200,
-    });
+    })
 
-    expect(getByText('Ao molho')).toBeTruthy();
+    expect(getByText('Ao molho')).toBeTruthy()
     expect(
       getByText(
         'Macarrão ao molho branco, fughi e cheiro verde das montanhas.',
       ),
-    ).toBeTruthy();
-    expect(getByText('Veggie')).toBeTruthy();
+    ).toBeTruthy()
+    expect(getByText('Veggie')).toBeTruthy()
     expect(
       getByText(
         'Macarrão com pimentão, ervilha e ervas finas colhidas no himalaia.',
       ),
-    ).toBeTruthy();
-  });
+    ).toBeTruthy()
+  })
 
   it('should be able to list the food plates filtered by category', async () => {
     const items = [
@@ -151,7 +151,7 @@ describe('Dashboard', () => {
           },
         ],
       },
-    ];
+    ]
 
     const categoryOneItems = [
       {
@@ -178,7 +178,7 @@ describe('Dashboard', () => {
           },
         ],
       },
-    ];
+    ]
 
     const categoryTwoItems = [
       {
@@ -200,7 +200,7 @@ describe('Dashboard', () => {
           },
         ],
       },
-    ];
+    ]
 
     const categories = [
       {
@@ -215,60 +215,60 @@ describe('Dashboard', () => {
         image_url:
           'https://storage.googleapis.com/golden-wind/bootcamp-gostack/desafio-gorestaurant-mobile/pizzas.png',
       },
-    ];
+    ]
 
     apiMock.onGet('/foods').reply(config => {
       switch (config.params.category_like) {
         case 1:
-          return [200, categoryOneItems];
+          return [200, categoryOneItems]
 
         case 2:
-          return [200, categoryTwoItems];
+          return [200, categoryTwoItems]
 
         default:
-          return [200, items];
+          return [200, items]
       }
-    });
+    })
 
-    apiMock.onGet('/foods?category_like=1').reply(200, categoryOneItems);
-    apiMock.onGet('/foods?category_like=2').reply(200, categoryTwoItems);
+    apiMock.onGet('/foods?category_like=1').reply(200, categoryOneItems)
+    apiMock.onGet('/foods?category_like=2').reply(200, categoryTwoItems)
 
-    apiMock.onGet('/categories').reply(200, categories);
+    apiMock.onGet('/categories').reply(200, categories)
 
-    const { getByText, queryByText, getByTestId } = render(<Dashboard />);
+    const { getByText, queryByText, getByTestId } = render(<Dashboard />)
 
     await wait(() => expect(getByText('Massas')).toBeTruthy(), {
       timeout: 200,
-    });
+    })
 
-    expect(getByText('Massas')).toBeTruthy();
-    expect(getByText('Pizzas')).toBeTruthy();
+    expect(getByText('Massas')).toBeTruthy()
+    expect(getByText('Pizzas')).toBeTruthy()
 
-    expect(getByText('Ao molho')).toBeTruthy();
-    expect(getByText('Veggie')).toBeTruthy();
-
-    await act(async () => {
-      fireEvent.press(getByTestId('category-1'));
-    });
-
-    expect(getByText('Ao molho')).toBeTruthy();
-
-    expect(queryByText('Veggie')).toBeFalsy();
+    expect(getByText('Ao molho')).toBeTruthy()
+    expect(getByText('Veggie')).toBeTruthy()
 
     await act(async () => {
-      fireEvent.press(getByTestId('category-2'));
-    });
+      fireEvent.press(getByTestId('category-1'))
+    })
 
-    expect(queryByText('Ao molho')).toBeFalsy();
-    expect(getByText('Veggie')).toBeTruthy();
+    expect(getByText('Ao molho')).toBeTruthy()
+
+    expect(queryByText('Veggie')).toBeFalsy()
 
     await act(async () => {
-      fireEvent.press(getByTestId('category-2'));
-    });
+      fireEvent.press(getByTestId('category-2'))
+    })
 
-    expect(getByText('Ao molho')).toBeTruthy();
-    expect(getByText('Veggie')).toBeTruthy();
-  });
+    expect(queryByText('Ao molho')).toBeFalsy()
+    expect(getByText('Veggie')).toBeTruthy()
+
+    await act(async () => {
+      fireEvent.press(getByTestId('category-2'))
+    })
+
+    expect(getByText('Ao molho')).toBeTruthy()
+    expect(getByText('Veggie')).toBeTruthy()
+  })
 
   it('should be able to list the food plates filtered by name search', async () => {
     const items = [
@@ -315,7 +315,7 @@ describe('Dashboard', () => {
           },
         ],
       },
-    ];
+    ]
 
     const aoMolhoSearchResult = [
       {
@@ -342,7 +342,7 @@ describe('Dashboard', () => {
           },
         ],
       },
-    ];
+    ]
 
     const veggieSearchResult = [
       {
@@ -364,7 +364,7 @@ describe('Dashboard', () => {
           },
         ],
       },
-    ];
+    ]
 
     const categories = [
       {
@@ -379,67 +379,65 @@ describe('Dashboard', () => {
         image_url:
           'https://storage.googleapis.com/golden-wind/bootcamp-gostack/desafio-gorestaurant-mobile/pizzas.png',
       },
-    ];
+    ]
 
     apiMock.onGet('/foods').reply(config => {
       switch (config.params.name_like) {
         case 'Ao molho':
-          return [200, aoMolhoSearchResult];
+          return [200, aoMolhoSearchResult]
 
         case 'Veggie':
-          return [200, veggieSearchResult];
+          return [200, veggieSearchResult]
 
         default:
-          return [200, items];
+          return [200, items]
       }
-    });
+    })
 
-    apiMock.onGet('/foods?name_like=Ao molho').reply(200, aoMolhoSearchResult);
+    apiMock.onGet('/foods?name_like=Ao molho').reply(200, aoMolhoSearchResult)
 
-    apiMock.onGet('/foods?name_like=Veggie').reply(200, veggieSearchResult);
+    apiMock.onGet('/foods?name_like=Veggie').reply(200, veggieSearchResult)
 
-    apiMock.onGet('/categories').reply(200, categories);
+    apiMock.onGet('/categories').reply(200, categories)
 
-    const { getByText, queryByText, getByTestId, debug } = render(
-      <Dashboard />,
-    );
+    const { getByText, queryByText, getByTestId, debug } = render(<Dashboard />)
 
     await wait(() => expect(getByText('Massas')).toBeTruthy(), {
       timeout: 200,
-    });
+    })
 
-    expect(getByText('Massas')).toBeTruthy();
-    expect(getByText('Pizzas')).toBeTruthy();
+    expect(getByText('Massas')).toBeTruthy()
+    expect(getByText('Pizzas')).toBeTruthy()
 
-    expect(getByText('Ao molho')).toBeTruthy();
-    expect(getByText('Veggie')).toBeTruthy();
+    expect(getByText('Ao molho')).toBeTruthy()
+    expect(getByText('Veggie')).toBeTruthy()
 
-    const inputSearch = getByTestId('search-input');
-
-    await act(async () => {
-      fireEvent.changeText(inputSearch, 'Ao molho');
-    });
-
-    expect(getByText('Ao molho')).toBeTruthy();
-
-    expect(queryByText('Veggie')).toBeFalsy();
+    const inputSearch = getByTestId('search-input')
 
     await act(async () => {
-      fireEvent.changeText(inputSearch, 'Veggie');
-    });
+      fireEvent.changeText(inputSearch, 'Ao molho')
+    })
 
-    expect(queryByText('Ao molho')).toBeFalsy();
+    expect(getByText('Ao molho')).toBeTruthy()
 
-    expect(getByText('Veggie')).toBeTruthy();
+    expect(queryByText('Veggie')).toBeFalsy()
 
     await act(async () => {
-      fireEvent.changeText(inputSearch, '');
-    });
+      fireEvent.changeText(inputSearch, 'Veggie')
+    })
 
-    expect(getByText('Ao molho')).toBeTruthy();
+    expect(queryByText('Ao molho')).toBeFalsy()
 
-    expect(queryByText('Veggie')).toBeTruthy();
-  });
+    expect(getByText('Veggie')).toBeTruthy()
+
+    await act(async () => {
+      fireEvent.changeText(inputSearch, '')
+    })
+
+    expect(getByText('Ao molho')).toBeTruthy()
+
+    expect(queryByText('Veggie')).toBeTruthy()
+  })
 
   it('should be able to navigate to the food details page', async () => {
     const items = [
@@ -486,7 +484,7 @@ describe('Dashboard', () => {
           },
         ],
       },
-    ];
+    ]
 
     apiMock.onGet('/categories').reply(200, [
       {
@@ -495,34 +493,34 @@ describe('Dashboard', () => {
         image_url:
           'https://storage.googleapis.com/golden-wind/bootcamp-gostack/desafio-gorestaurant-mobile/massas.png',
       },
-    ]);
+    ])
 
     apiMock.onGet('/foods').reply(config => {
       if (config.params.name_like === '') {
-        return [200, items];
+        return [200, items]
       }
 
-      return [200, items];
-    });
+      return [200, items]
+    })
 
-    apiMock.onGet('/foods?name_like=').reply(200, items);
+    apiMock.onGet('/foods?name_like=').reply(200, items)
 
-    const { getByText, getByTestId } = render(<Dashboard />);
+    const { getByText, getByTestId } = render(<Dashboard />)
 
     await wait(() => expect(getByText('Ao molho')).toBeTruthy(), {
       timeout: 200,
-    });
+    })
 
     await act(async () => {
-      fireEvent.press(getByTestId('food-1'));
-    });
+      fireEvent.press(getByTestId('food-1'))
+    })
 
-    expect(getByTestId('food-1')).toBeTruthy();
+    expect(getByTestId('food-1')).toBeTruthy()
 
-    expect(mockedNavigate).toHaveBeenCalledTimes(1);
+    expect(mockedNavigate).toHaveBeenCalledTimes(1)
 
     expect(mockedNavigate).toHaveBeenCalledWith('FoodDetails', {
       id: 1,
-    });
-  });
-});
+    })
+  })
+})

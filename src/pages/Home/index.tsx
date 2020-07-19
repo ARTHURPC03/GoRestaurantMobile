@@ -1,9 +1,9 @@
-import React from 'react';
-import { Image } from 'react-native';
+import React from 'react'
+import { Image } from 'react-native'
 
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native'
 
-import Icon from 'react-native-vector-icons/Feather';
+import Icon from 'react-native-vector-icons/Feather'
 
 import {
   Container,
@@ -12,18 +12,18 @@ import {
   NavigationButton,
   ButtonText,
   IconContainer,
-} from './styles';
+} from './styles'
 
-import Background from '../../assets/home-background.png';
-import Logo from '../../assets/logo.png';
+import Background from '../../assets/home-background.png'
+import Logo from '../../assets/logo.png'
 
 const Home: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation()
 
   async function handleNavigate(): Promise<void> {
     navigation.navigate('MainBottom', {
       screen: 'Dashboard',
-    });
+    })
   }
 
   return (
@@ -45,7 +45,7 @@ const Home: React.FC = () => {
         </IconContainer>
       </NavigationButton>
     </BackgroundImage>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

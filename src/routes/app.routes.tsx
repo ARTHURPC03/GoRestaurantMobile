@@ -1,15 +1,15 @@
-import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
+import React from 'react'
+import { createStackNavigator } from '@react-navigation/stack'
+import { NavigationContainer } from '@react-navigation/native'
 
-import { View } from 'react-native';
-import Icon from 'react-native-vector-icons/Feather';
-import TabRoutes from './tab.routes';
+import { View } from 'react-native'
+import Icon from 'react-native-vector-icons/Feather'
+import TabRoutes from './tab.routes'
 
-import Home from '../pages/Home';
-import FoodDetails from '../pages/FoodDetails';
+import Home from '../pages/Home'
+import FoodDetails from '../pages/FoodDetails'
 
-const App = createStackNavigator();
+const App = createStackNavigator()
 
 const AppRoutes: React.FC = () => (
   <NavigationContainer>
@@ -65,6 +65,6 @@ const AppRoutes: React.FC = () => (
       />
     </App.Navigator>
   </NavigationContainer>
-);
+)
 
-export default AppRoutes;
+export default AppRoutes

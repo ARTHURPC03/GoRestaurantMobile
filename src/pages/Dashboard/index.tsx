@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { Image, ScrollView } from 'react-native';
+import React, { useEffect, useState } from 'react'
+import { Image, ScrollView } from 'react-native'
 
-import Icon from 'react-native-vector-icons/Feather';
-import { useNavigation } from '@react-navigation/native';
-import Logo from '../../assets/logo-header.png';
-import SearchInput from '../../components/SearchInput';
+import Icon from 'react-native-vector-icons/Feather'
+import { useNavigation } from '@react-navigation/native'
+import Logo from '../../assets/logo-header.png'
+import SearchInput from '../../components/SearchInput'
 
-import api from '../../services/api';
-import formatValue from '../../utils/formatValue';
+import api from '../../services/api'
+import formatValue from '../../utils/formatValue'
 
 import {
   Container,
@@ -26,32 +26,30 @@ import {
   FoodTitle,
   FoodDescription,
   FoodPricing,
-} from './styles';
+} from './styles'
 
 interface Food {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  thumbnail_url: string;
-  formattedPrice: string;
+  id: number
+  name: string
+  description: string
+  price: number
+  thumbnail_url: string
+  formattedPrice: string
 }
 
 interface Category {
-  id: number;
-  title: string;
-  image_url: string;
+  id: number
+  title: string
+  image_url: string
 }
 
 const Dashboard: React.FC = () => {
-  const [foods, setFoods] = useState<Food[]>([]);
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<
-    number | undefined
-  >();
-  const [searchValue, setSearchValue] = useState('');
+  const [foods, setFoods] = useState<Food[]>([])
+  const [categories, setCategories] = useState<Category[]>([])
+  const [selectedCategory, setSelectedCategory] = useState<number | undefined>()
+  const [searchValue, setSearchValue] = useState('')
 
-  const navigation = useNavigation();
+  const navigation = useNavigation()
 
   async function handleNavigate(id: number): Promise<void> {
     // Navigate do ProductDetails page
@@ -62,16 +60,16 @@ const Dashboard: React.FC = () => {
       // Load Foods from API
     }
 
-    loadFoods();
-  }, [selectedCategory, searchValue]);
+    loadFoods()
+  }, [selectedCategory, searchValue])
 
   useEffect(() => {
     async function loadCategories(): Promise<void> {
       // Load categories from API
     }
 
-    loadCategories();
-  }, []);
+    loadCategories()
+  }, [])
 
   function handleSelectCategory(id: number): void {
     // Select / deselect category
@@ -149,7 +147,7 @@ const Dashboard: React.FC = () => {
         </FoodsContainer>
       </ScrollView>
     </Container>
-  );
-};
+  )
+}
 
-export default Dashboard;
+export default Dashboard
