@@ -15,6 +15,8 @@ declare module 'styled-components' {
       text: string
       inputColor: string
       inputPlaceholder: string
+      inputContainer: string
+      title: string
     }
   }
 }

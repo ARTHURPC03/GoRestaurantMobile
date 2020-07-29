@@ -13,5 +13,7 @@ export default {
     text: '#f4ede8',
     inputColor: '#FFFFFF',
     inputPlaceholder: '#666360',
+    inputContainer: '#181818',
+    title: '#f0f0f5',
   },
 }

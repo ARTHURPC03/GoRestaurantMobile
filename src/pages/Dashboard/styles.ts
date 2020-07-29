@@ -6,7 +6,7 @@ interface CategoryItemProps {
 
 export const Container = styled.View`
   flex: 1;
-  background: #fff;
+  background: ${props => props.theme.colors.primary};
 `
 
 export const Header = styled.View`
@@ -29,7 +29,7 @@ export const Title = styled.Text`
   font-weight: 600;
   font-size: 20px;
   line-height: 30px;
-  color: #3d3d4d;
+  color: ${props => props.theme.colors.title};
   padding: 0 20px;
 `
 
