@@ -17,6 +17,7 @@ declare module 'styled-components' {
       inputPlaceholder: string
       inputContainer: string
       title: string
+      itemTitle: string
     }
   }
 }

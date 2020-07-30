@@ -15,5 +15,6 @@ export default {
     inputPlaceholder: '#000000',
     inputContainer: '#f0f0f5',
     title: '#3d3d4d',
+    itemTitle: '#6c6c80',
   },
 }
