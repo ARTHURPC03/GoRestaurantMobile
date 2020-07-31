@@ -16,6 +16,7 @@ const App: React.FC = () => {
   const toggleTheme = (): void => {
     setTheme(theme.title === 'dark' ? light : dark)
   }
+
   return (
     <ThemeProvider theme={theme}>
       <View style={{ flex: 1 }}>
