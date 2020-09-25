@@ -1,10 +1,8 @@
 import 'styled-components'
-// import { ImageSourcePropType } from 'react-native'
 
 declare module 'styled-components' {
   export interface DefaultTheme {
     title: string
-    // logo: ImageSourcePropType
 
     colors: {
       primary: string

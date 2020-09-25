@@ -1,8 +1,5 @@
-// import logoL from '../../assets/logoL/logoL.png'
-
 export default {
   title: 'light',
-  // logo: logoL,
 
   colors: {
     primary: '#FFFFFF',

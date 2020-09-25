@@ -1,8 +1,5 @@
-// import logo from '../../assets/logo/logo.png'
-
 export default {
   title: 'dark',
-  // logo,
 
   colors: {
     primary: '#000000',
